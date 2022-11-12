@@ -1,0 +1,24 @@
+from python:3.8.10 as build
+
+WORKDIR /app/
+
+# Copy pip prerequisites
+COPY ./hello_world/requirements.txt /app/
+
+# Add path of the future venv directory
+ENV PATH="/opt/hello_world_venv/bin:$PATH"
+
+# Create virtual environment and install dependencies
+RUN python -m venv /opt/hello_world_venv && \
+  pip install -Ur requirements.txt
+
+FROM python:3.8.10 
+WORKDIR /app/
+# Copy python prerequisites
+COPY --from=build /opt/hello_world_venv /opt/hello_world_venv
+
+ENV PATH="/opt/hello_world_venv/bin:$PATH"
+ENV AWS_DEFAULT_REGION="us-east-1"
+COPY ./hello_world /app/
+# CMD ["python", "hello_world.py"]
+CMD ["gunicorn", "--log-file", "-", "--access-logfile", "-", "--workers", "3", "--bind", "0.0.0.0:5000", "hello_world_wsgi:app"]
