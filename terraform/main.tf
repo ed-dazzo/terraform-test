@@ -21,6 +21,6 @@ locals {
   EOT
 
   tags = {
-    Name       = local.name
+    Name = local.name
   }
 }

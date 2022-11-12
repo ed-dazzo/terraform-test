@@ -5,15 +5,15 @@
 #
 
 resource "aws_dynamodb_table" "main" {
- name = "web-app-table"
- billing_mode = "PROVISIONED"
- read_capacity= "30"
- write_capacity= "30"
- hash_key       = "app"
- lifecycle {
- ignore_changes = [
-     write_capacity, read_capacity
-   ]
+  name           = "web-app-table"
+  billing_mode   = "PROVISIONED"
+  read_capacity  = "30"
+  write_capacity = "30"
+  hash_key       = "app"
+  lifecycle {
+    ignore_changes = [
+      write_capacity, read_capacity
+    ]
   }
   attribute {
     name = "app"

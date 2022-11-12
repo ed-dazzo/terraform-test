@@ -4,8 +4,8 @@
 # Container Orchestration
 #
 module "ecs" {
-  source = "terraform-aws-modules/ecs/aws"
-  version = "~> 4.1.2"
+  source       = "terraform-aws-modules/ecs/aws"
+  version      = "~> 4.1.2"
   cluster_name = local.name
 
   cluster_configuration = {
@@ -56,11 +56,11 @@ module "ecs" {
 data "aws_ami" "main" {
   owners = ["self"]
   filter {
-    name = "name"
+    name   = "name"
     values = ["${local.name}*"]
   }
   filter {
-    name = "tag:env"
+    name   = "tag:env"
     values = ["prod"]
   }
 }
@@ -84,7 +84,7 @@ module "autoscaling" {
   iam_role_policies = {
     AmazonEC2ContainerServiceforEC2Role = "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"
     AmazonSSMManagedInstanceCore        = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
-    CloudWatchAgentAdminPolicy         = "arn:aws:iam::aws:policy/CloudWatchAgentAdminPolicy"
+    CloudWatchAgentAdminPolicy          = "arn:aws:iam::aws:policy/CloudWatchAgentAdminPolicy"
     CloudWatchAgentServerPolicy         = "arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy"
   }
 
@@ -105,7 +105,7 @@ module "autoscaling" {
   tags = local.tags
 }
 
-module "autoscaling_sg" { 
+module "autoscaling_sg" {
   source  = "terraform-aws-modules/security-group/aws"
   version = "~> 4.0"
 
