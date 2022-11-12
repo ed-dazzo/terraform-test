@@ -60,7 +60,7 @@ module "autoscaling" {
 
   name = "${local.name}-asg"
 
-  image_id      = jsondecode(data.aws_ssm_parameter.ecs_optimized_ami.value)["image_id"]
+  image_id      = "ami-024bc2d1c8195eade"
   instance_type = "t3.micro"
 
   security_groups                 = [module.autoscaling_sg.security_group_id]
@@ -73,6 +73,8 @@ module "autoscaling" {
   iam_role_policies = {
     AmazonEC2ContainerServiceforEC2Role = "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"
     AmazonSSMManagedInstanceCore        = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
+    CloudWatchAgentAdminPolicy         = "arn:aws:iam::aws:policy/CloudWatchAgentAdminPolicy"
+    CloudWatchAgentServerPolicy         = "arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy"
   }
 
   vpc_zone_identifier = module.vpc.private_subnets
