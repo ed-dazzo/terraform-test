@@ -159,7 +159,7 @@ resource "aws_iam_policy" "main" {
         {
            "Effect" : "Allow",
            "Action" : ["dynamodb:*"],
-           "Resource" : "${aws_dynamodb_table.main.arn}"
+           "Resource" : aws_dynamodb_table.main.arn
         }
       ]
    })
