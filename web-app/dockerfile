@@ -21,4 +21,4 @@ ENV PATH="/opt/hello_world_venv/bin:$PATH"
 ENV AWS_DEFAULT_REGION="us-east-1"
 COPY ./hello_world /app/
 # CMD ["python", "hello_world.py"]
-CMD ["gunicorn", "--log-file", "-", "--access-logfile", "-", "--workers", "3", "--bind", "0.0.0.0:5000", "hello_world_wsgi:app"]
+CMD ["gunicorn", "--log-file", "-", "--access-logfile", "-", "--workers", "8", "--threads", "2", "--bind", "0.0.0.0:5000", "hello_world_wsgi:app"]

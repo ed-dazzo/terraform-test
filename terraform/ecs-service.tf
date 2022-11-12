@@ -73,8 +73,8 @@ module "ecs-container-definition" {
   version          = "0.58.1"
   container_name   = local.name
   container_image  = "${aws_ecr_repository.main.repository_url}:latest"
-  container_memory = 300
-  container_cpu    = 1000
+  container_memory = 600
+  container_cpu    = 2000
   essential        = true
   port_mappings = [
     {
@@ -103,8 +103,8 @@ module "ecs-alb-service-task" {
   deployment_maximum_percent = 200
   # Keeping costs minimal at first, we can scale this along with the number of available nodes
   desired_count         = 2
-  task_memory           = 300
-  task_cpu              = 1000
+  task_memory           = 600
+  task_cpu              = 2000
   task_exec_policy_arns = [aws_iam_policy.main.arn]
   ecs_load_balancers = [
     {
