@@ -50,8 +50,16 @@ module "ecs" {
 #
 
 # The ASG AMI
-data "aws_ssm_parameter" "ecs_optimized_ami" {
-  name = "/aws/service/ecs/optimized-ami/amazon-linux-2/recommended"
+data "aws_ami" "main" {
+  owners = ["self"]
+  filter {
+    name = "name"
+    values = ["${local.name}*"]
+  }
+  filter {
+    name = "tag:env"
+    values = ["prod"]
+  }
 }
 
 module "autoscaling" {
@@ -60,7 +68,7 @@ module "autoscaling" {
 
   name = "${local.name}-asg"
 
-  image_id      = "ami-024bc2d1c8195eade"
+  image_id      = data.aws_ami.main.id
   instance_type = "t3.micro"
 
   security_groups                 = [module.autoscaling_sg.security_group_id]

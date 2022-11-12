@@ -8,14 +8,16 @@ packer {
 }
 
 source "amazon-ebs" "amazonlinux2" {
-  ami_name      = "hello-world-ecs"
+  ami_name      = "hello-world-ecs-${formatdate("YYYYMMDDhhmmss", timestamp())}"
   instance_type = "t3.micro"
   region        = "us-east-1"
   source_ami    = "ami-0fe77b349d804e9e6"
   ssh_username = "ec2-user"
   tags = {
     OS_Version = "AmazonLinux2"
-    Date_Created = formatdate("YYYY-MM-DD-hhmmss", timestamp())
+    creator = var.aws_user
+    git_branch = var.git_branch
+    git_revision = var.git_revision
   }
 }
 
@@ -26,7 +28,7 @@ build {
   ]
   provisioner "file" {
     destination = "/tmp/config.json"
-    source = "./agent-config.json"
+    source = "${path.root}/agent-config.json"
   }
   
   provisioner "shell" {
