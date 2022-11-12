@@ -50,6 +50,9 @@ module "ecs" {
 #
 
 # The ASG AMI
+# Note: the ami is built by packer. In order to ensure we don't accidentally change
+# the deployed ami image, we need to tag the desired ami with the "env" key equal to
+# prod. This can eventually be automated.
 data "aws_ami" "main" {
   owners = ["self"]
   filter {
