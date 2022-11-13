@@ -28,11 +28,46 @@
             "log_stream_name": "{instance_id}_{hostname}",
             "retention_in_days": 7,
             "timezone": "Local"
+          },
+          {
+            "file_path": "/var/log/ecs/ecs-init.log",
+            "log_group_name": "/ec2/var/log/secure",
+            "log_stream_name": "{instance_id}_{hostname}",
+            "retention_in_days": 7,
+            "timezone": "Local"
+          },
+          {
+            "file_path": "/var/log/ecs/ecs-cni-eni-plugin.log",
+            "log_group_name": "/ec2/var/log/secure",
+            "log_stream_name": "{instance_id}_{hostname}",
+            "retention_in_days": 7,
+            "timezone": "Local"
+          },
+          {
+            "file_path": "/var/log/ecs/ecs-cni-bridge-plugin.log",
+            "log_group_name": "/ec2/var/log/secure",
+            "log_stream_name": "{instance_id}_{hostname}",
+            "retention_in_days": 7,
+            "timezone": "Local"
+          },
+          {
+            "file_path": "/var/log/ecs/ecs-agent.log",
+            "log_group_name": "/ec2/var/log/secure",
+            "log_stream_name": "{instance_id}_{hostname}",
+            "retention_in_days": 7,
+            "timezone": "Local"
+          },
+          {
+            "file_path": "/var/log/ecs/audit.log",
+            "log_group_name": "/ec2/var/log/secure",
+            "log_stream_name": "{instance_id}_{hostname}",
+            "retention_in_days": 7,
+            "timezone": "Local"
           }
         ]
       }
     }
-  }, 
+  },
   "metrics": {
     "aggregation_dimensions": [
       [

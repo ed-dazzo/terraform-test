@@ -76,6 +76,14 @@ module "ecs-container-definition" {
   container_memory = 600
   container_cpu    = 2000
   essential        = true
+  log_configuration = {
+      logDriver = "awslogs",
+      options = {
+          awslogs-group = aws_cloudwatch_log_group.this.name,
+          awslogs-region = local.region,
+          awslogs-stream-prefix = local.name
+      }
+  }
   port_mappings = [
     {
       containerPort = 5000
